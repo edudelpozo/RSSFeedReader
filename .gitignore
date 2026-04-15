@@ -1,0 +1,63 @@
+# .NET / C#
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+packages/
+*.nupkg
+*.snupkg
+
+# Build outputs
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio
+.vs/
+*.rsuser
+*.vsp
+*.vspx
+*.sap
+TestResult.xml
+
+# Rider
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/
+
+# dotnet tool manifest
+.config/
+
+# Environment / secrets
+.env
+.env.*
+appsettings.*.json
+!appsettings.json
+!appsettings.Development.json
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+
+# Blazor / WASM publish
+**/wwwroot/_framework/
+
+# Test results
+TestResults/
+coverage/
+*.coverage
+*.coveragexml

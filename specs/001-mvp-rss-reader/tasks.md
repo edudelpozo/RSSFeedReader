@@ -25,10 +25,10 @@
 
 **Purpose**: Scaffold all three .NET projects and wire them into a single solution.
 
-- [ ] T001 Create `RSSFeedReader.sln` at repository root using `dotnet new sln`
-- [ ] T002 [P] Scaffold ASP.NET Core Web API project at `backend/RSSFeedReader.Api/` using `dotnet new webapi`, set `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` in `backend/RSSFeedReader.Api/RSSFeedReader.Api.csproj`, and add to solution
-- [ ] T003 [P] Scaffold Blazor WebAssembly standalone project at `frontend/RSSFeedReader.UI/` using `dotnet new blazorwasm`, set `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` in `frontend/RSSFeedReader.UI/RSSFeedReader.UI.csproj`, and add to solution
-- [ ] T004 [P] Scaffold xUnit test project at `backend/RSSFeedReader.Api.Tests/` using `dotnet new xunit`, add `Microsoft.AspNetCore.Mvc.Testing` NuGet reference, add project reference to `backend/RSSFeedReader.Api/`, set `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` in `backend/RSSFeedReader.Api.Tests/RSSFeedReader.Api.Tests.csproj`, and add to solution
+- [x] T001 Create `RSSFeedReader.sln` at repository root using `dotnet new sln`
+- [x] T002 [P] Scaffold ASP.NET Core Web API project at `backend/RSSFeedReader.Api/` using `dotnet new webapi`, set `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` in `backend/RSSFeedReader.Api/RSSFeedReader.Api.csproj`, and add to solution
+- [x] T003 [P] Scaffold Blazor WebAssembly standalone project at `frontend/RSSFeedReader.UI/` using `dotnet new blazorwasm`, set `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` in `frontend/RSSFeedReader.UI/RSSFeedReader.UI.csproj`, and add to solution
+- [x] T004 [P] Scaffold xUnit test project at `backend/RSSFeedReader.Api.Tests/` using `dotnet new xunit`, add `Microsoft.AspNetCore.Mvc.Testing` NuGet reference, add project reference to `backend/RSSFeedReader.Api/`, set `<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` in `backend/RSSFeedReader.Api.Tests/RSSFeedReader.Api.Tests.csproj`, and add to solution
 
 **Checkpoint**: `dotnet build RSSFeedReader.sln` succeeds with no warnings — all three projects compile.
 
@@ -40,15 +40,15 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T005 Create `Subscription` domain model (`public record Subscription(string Url)`) in `backend/RSSFeedReader.Api/Models/Subscription.cs`
-- [ ] T006 [P] Create `AddSubscriptionRequest` DTO (`public record AddSubscriptionRequest([Required] string Url)`) in `backend/RSSFeedReader.Api/DTOs/AddSubscriptionRequest.cs`
-- [ ] T007 [P] Create `SubscriptionDto` DTO (`public record SubscriptionDto(string Url)`) in `backend/RSSFeedReader.Api/DTOs/SubscriptionDto.cs`
-- [ ] T008 Create `ISubscriptionService` interface with `Task<SubscriptionDto> AddAsync(string url)` and `Task<IReadOnlyList<SubscriptionDto>> GetAllAsync()` signatures in `backend/RSSFeedReader.Api/Services/ISubscriptionService.cs`
-- [ ] T009 Configure explicit CORS policy `FrontendPolicy` (allowing only `http://localhost:5213` and `https://localhost:7025; no wildcard`) and register `ISubscriptionService` DI placeholder in `backend/RSSFeedReader.Api/Program.cs`
-- [ ] T010 [P] Configure backend launch settings to listen on `http://localhost:5151` in `backend/RSSFeedReader.Api/Properties/launchSettings.json`
-- [ ] T011 [P] Configure frontend launch settings to listen on `http://localhost:5213` in `frontend/RSSFeedReader.UI/Properties/launchSettings.json`
-- [ ] T012 [P] Set `"ApiBaseUrl": "http://localhost:5151/api/"` in `frontend/RSSFeedReader.UI/wwwroot/appsettings.json`
-- [ ] T013 Remove Blazor template demo pages (`Counter.razor`, `Weather.razor`, `Home.razor`) from `frontend/RSSFeedReader.UI/Pages/` and remove their nav links from `frontend/RSSFeedReader.UI/Layout/NavMenu.razor`
+- [x] T005 Create `Subscription` domain model (`public record Subscription(string Url)`) in `backend/RSSFeedReader.Api/Models/Subscription.cs`
+- [x] T006 [P] Create `AddSubscriptionRequest` DTO (`public record AddSubscriptionRequest([Required] string Url)`) in `backend/RSSFeedReader.Api/DTOs/AddSubscriptionRequest.cs`
+- [x] T007 [P] Create `SubscriptionDto` DTO (`public record SubscriptionDto(string Url)`) in `backend/RSSFeedReader.Api/DTOs/SubscriptionDto.cs`
+- [x] T008 Create `ISubscriptionService` interface with `Task<SubscriptionDto> AddAsync(string url)` and `Task<IReadOnlyList<SubscriptionDto>> GetAllAsync()` signatures in `backend/RSSFeedReader.Api/Services/ISubscriptionService.cs`
+- [x] T009 Configure explicit CORS policy `FrontendPolicy` (allowing only `http://localhost:5213` and `https://localhost:7025; no wildcard`) and register `ISubscriptionService` DI placeholder in `backend/RSSFeedReader.Api/Program.cs`
+- [x] T010 [P] Configure backend launch settings to listen on `http://localhost:5151` in `backend/RSSFeedReader.Api/Properties/launchSettings.json`
+- [x] T011 [P] Configure frontend launch settings to listen on `http://localhost:5213` in `frontend/RSSFeedReader.UI/Properties/launchSettings.json`
+- [x] T012 [P] Set `"ApiBaseUrl": "http://localhost:5151/api/"` in `frontend/RSSFeedReader.UI/wwwroot/appsettings.json`
+- [x] T013 Remove Blazor template demo pages (`Counter.razor`, `Weather.razor`, `Home.razor`) from `frontend/RSSFeedReader.UI/Pages/` and remove their nav links from `frontend/RSSFeedReader.UI/Layout/NavMenu.razor`
 
 **Checkpoint**: Foundation ready — `dotnet build RSSFeedReader.sln` still clean; CORS policy is in place; all DTOs and the service interface compile; ports are configured; no template pages remain.
 
@@ -64,18 +64,18 @@
 
 > **Write these tests FIRST; verify they FAIL before implementing the service/controller.**
 
-- [ ] T014 [P] [US1] Write `SubscriptionService` unit tests for `AddAsync`: happy path (valid URL is returned and stored) and error path (empty string throws `ArgumentException`) in `backend/RSSFeedReader.Api.Tests/Unit/SubscriptionServiceTests.cs`
-- [ ] T015 [P] [US1] Write integration tests for `POST /api/subscriptions`: returns `201 Created` with `SubscriptionDto` body on valid URL; returns `400 Bad Request` on empty URL in `backend/RSSFeedReader.Api.Tests/Integration/SubscriptionsControllerTests.cs`
+- [x] T014 [P] [US1] Write `SubscriptionService` unit tests for `AddAsync`: happy path (valid URL is returned and stored) and error path (empty string throws `ArgumentException`) in `backend/RSSFeedReader.Api.Tests/Unit/SubscriptionServiceTests.cs`
+- [x] T015 [P] [US1] Write integration tests for `POST /api/subscriptions`: returns `201 Created` with `SubscriptionDto` body on valid URL; returns `400 Bad Request` on empty URL in `backend/RSSFeedReader.Api.Tests/Integration/SubscriptionsControllerTests.cs`
 
 ### Implementation for User Story 1
 
-- [ ] T016 [US1] Implement `SubscriptionService.AddAsync` with a `private readonly List<Subscription> _subscriptions` and `private readonly object _lock` (thread-safe append, `ArgumentException` guard on empty URL) in `backend/RSSFeedReader.Api/Services/SubscriptionService.cs`
-- [ ] T017 [US1] Register `SubscriptionService` as a singleton (`builder.Services.AddSingleton<ISubscriptionService, SubscriptionService>()`) in `backend/RSSFeedReader.Api/Program.cs`
-- [ ] T018 [US1] Implement `POST /api/subscriptions` action (inject `ISubscriptionService`, call `AddAsync`, return `CreatedAtAction` with `SubscriptionDto`) in `backend/RSSFeedReader.Api/Controllers/SubscriptionsController.cs`
-- [ ] T019 [US1] Create `ISubscriptionApiClient` interface with `Task<SubscriptionDto?> AddSubscriptionAsync(string url)` and `Task<List<SubscriptionDto>> GetSubscriptionsAsync()` signatures in `frontend/RSSFeedReader.UI/Services/ISubscriptionApiClient.cs`
-- [ ] T020 [US1] Implement `SubscriptionApiClient.AddSubscriptionAsync` (POST JSON to `api/subscriptions`, deserialize response, return `SubscriptionDto?`) in `frontend/RSSFeedReader.UI/Services/SubscriptionApiClient.cs`
-- [ ] T021 [US1] Register `SubscriptionApiClient`, configure `HttpClient` with base address read from `IConfiguration["ApiBaseUrl"]` in `frontend/RSSFeedReader.UI/Program.cs`
-- [ ] T022 [US1] Implement `Subscriptions.razor` (`@page "/"`) with URL text input bound to `newUrl`, **Add** button that calls `AddSubscriptionAsync`, updates `subscriptions` list on success, shows `errorMessage` on failure, and disables the button via `isLoading` flag in `frontend/RSSFeedReader.UI/Pages/Subscriptions.razor`
+- [x] T016 [US1] Implement `SubscriptionService.AddAsync` with a `private readonly List<Subscription> _subscriptions` and `private readonly object _lock` (thread-safe append, `ArgumentException` guard on empty URL) in `backend/RSSFeedReader.Api/Services/SubscriptionService.cs`
+- [x] T017 [US1] Register `SubscriptionService` as a singleton (`builder.Services.AddSingleton<ISubscriptionService, SubscriptionService>()`) in `backend/RSSFeedReader.Api/Program.cs`
+- [x] T018 [US1] Implement `POST /api/subscriptions` action (inject `ISubscriptionService`, call `AddAsync`, return `CreatedAtAction` with `SubscriptionDto`) in `backend/RSSFeedReader.Api/Controllers/SubscriptionsController.cs`
+- [x] T019 [US1] Create `ISubscriptionApiClient` interface with `Task<SubscriptionDto?> AddSubscriptionAsync(string url)` and `Task<List<SubscriptionDto>> GetSubscriptionsAsync()` signatures in `frontend/RSSFeedReader.UI/Services/ISubscriptionApiClient.cs`
+- [x] T020 [US1] Implement `SubscriptionApiClient.AddSubscriptionAsync` (POST JSON to `api/subscriptions`, deserialize response, return `SubscriptionDto?`) in `frontend/RSSFeedReader.UI/Services/SubscriptionApiClient.cs`
+- [x] T021 [US1] Register `SubscriptionApiClient`, configure `HttpClient` with base address read from `IConfiguration["ApiBaseUrl"]` in `frontend/RSSFeedReader.UI/Program.cs`
+- [x] T022 [US1] Implement `Subscriptions.razor` (`@page "/"`) with URL text input bound to `newUrl`, **Add** button that calls `AddSubscriptionAsync`, updates `subscriptions` list on success, shows `errorMessage` on failure, and disables the button via `isLoading` flag in `frontend/RSSFeedReader.UI/Pages/Subscriptions.razor`
 
 **Checkpoint**: US1 fully functional and independently testable — adding a URL via the browser form appends it to the displayed list; `dotnet test` on SubscriptionServiceTests and SubscriptionsControllerTests (POST cases) passes.
 
